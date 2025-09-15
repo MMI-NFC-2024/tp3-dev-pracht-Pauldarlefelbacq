@@ -7,11 +7,11 @@ import GraphicSpecies from "../components/GraphicSpecies.astro";
     <div class="container">
         <nav class="species-menu">
             <h2>Espèces de pengouins</h2>
-            <ul>
-                <li><a href="#adelie">Pengouin Adélie</a></li>
-                <li><a href="#gentoo">Pengouin Gentoo</a></li>
-                <li><a href="#chinstrap">Pengouin Chinstrap</a></li>
-            </ul>
+            <select id="species-menu">
+                <option value="Adelie">Adelie</option>
+                <option value="Gentoo">Gentoo</option>
+                <option value="Chinstrap">Chinstrap</option>
+            </select>
         </nav>
 
         <div class="slider-container">
@@ -31,6 +31,15 @@ import GraphicSpecies from "../components/GraphicSpecies.astro";
             </div>
         </div>
     </div>
+    <script>
+        const speciesSelect = document.querySelector("#species-menu") as HTMLSelectElement;
+
+        speciesSelect?.addEventListener("change", (evt) => {
+            const value = (evt.target as HTMLSelectElement).value;
+            const targetElement = document.querySelector(`#${value.toLowerCase()}`);
+            targetElement?.scrollIntoView({ behavior: 'smooth' });
+        });
+    </script>
 
     <style>
         .container {

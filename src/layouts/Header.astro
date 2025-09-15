@@ -1,6 +1,3 @@
----
-import { Select } from 'free-astro-components'
----
 <header>
     <nav>
         <div>
@@ -15,7 +12,6 @@ import { Select } from 'free-astro-components'
             const speciesSelect = document.querySelector("#species") as HTMLSelectElement;
             const subtileSelect = document.querySelector("#subtile") as HTMLSelectElement;
             
-            // Update selects based on current page
             const path = location.pathname;
             if (path.includes("/species/")) {
                 const species = path.split("/species/")[1]?.replace("/", "");
