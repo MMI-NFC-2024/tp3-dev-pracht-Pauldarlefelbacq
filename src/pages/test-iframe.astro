@@ -6,11 +6,11 @@ import GraphicSpecies from "../components/GraphicSpecies.astro";
   <div class="container">
     <nav>
       <h2>Espèces de pengouin</h2>
-      <ul>
-        <li><a href="/species/Adelie" target="species-frame">Pengouin Adélie</a></li>
-        <li><a href="/species/Gentoo" target="species-frame">Pengouin Gentoo</a></li>
-        <li><a href="/species/Chinstrap" target="species-frame">Pengouin Chinstrap</a></li>
-      </ul>
+      <select id="species-select">
+        <option value="/species/Adelie">Pengouin Adélie</option>
+        <option value="/species/Gentoo">Pengouin Gentoo</option>
+        <option value="/species/Chinstrap">Pengouin Chinstrap</option>
+      </select>
     </nav>
     
     <div class="iframe-container">
@@ -29,7 +29,21 @@ import GraphicSpecies from "../components/GraphicSpecies.astro";
         }
       };
     }
-    window.addEventListener('load', resizeIframe());
+
+    function handleSpeciesSelect() {
+      const select = document.getElementById('species-select') as HTMLSelectElement;
+      const iframe = document.getElementById('species-frame') as HTMLIFrameElement;
+      
+      select.addEventListener('change', function() {
+        iframe.src = this.value;
+        resizeIframe();
+      });
+    }
+
+    window.addEventListener('load', function() {
+      resizeIframe();
+      handleSpeciesSelect();
+    });
     </script>
 
 <style>
