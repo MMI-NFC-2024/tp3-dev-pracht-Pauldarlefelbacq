@@ -1,0 +1,96 @@
+---
+import Layout from "../layouts/Layout.astro";
+import GraphicSpecies from "../components/GraphicSpecies.astro";
+import { Tabs, TabsList, TabsTab, TabsPanel } from 'accessible-astro-components'
+---
+
+<Layout>
+    <div class="container">
+            <h2>Espèces de pengouins</h2>
+            <Tabs>
+                <TabsList>
+                    <TabsTab id="tab1" controls="panel1" selected>First tab</TabsTab>
+                    <TabsTab id="tab2" controls="panel2">Second tab</TabsTab>
+                    <TabsTab id="tab3" controls="panel3">Third tab</TabsTab>
+                </TabsList>
+
+            <TabsPanel id="panel1" labelledby="tab1" selected>
+                <h3>Pengouin Adélie</h3>
+                <GraphicSpecies species="Adelie" />
+            </TabsPanel>
+            <TabsPanel id="panel2" labelledby="tab2">
+                <h3>Pengouin Gentoo</h3>
+                <GraphicSpecies species="Gentoo" />
+            </TabsPanel>
+            <TabsPanel id="panel3" labelledby="tab3">
+                <h3>Pengouin Chinstrap</h3>
+                <GraphicSpecies species="Chinstrap" />
+            </TabsPanel>
+    </div>
+    <script>
+        const speciesSelect = document.querySelector("#species-menu") as HTMLSelectElement;
+
+        speciesSelect?.addEventListener("change", (evt) => {
+            const value = (evt.target as HTMLSelectElement).value;
+            const targetElement = document.querySelector(`#${value.toLowerCase()}`);
+            targetElement?.scrollIntoView({ behavior: 'smooth' });
+        });
+    </script>
+
+    <style>
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .species-menu {
+            margin-bottom: 2rem;
+        }
+
+        .species-menu ul {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            padding: 0;
+            justify-content: center;
+        }
+
+        .species-menu a {
+            text-decoration: none;
+            font-weight: bold;
+            color: #333;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            background-color: #f0f0f0;
+            transition: all 0.3s ease;
+        }
+
+        .species-menu a:hover {
+            background-color: #ddd;
+        }
+
+        .slider-container {
+            width: 100%;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .slider {
+            display: flex;
+            width: 100%;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+        }
+
+
+        .slide {
+            flex: 0 0 100%;
+            width: 100%;
+            scroll-snap-align: start;
+            padding: 1rem;
+        }
+
+    </style>
+</Layout>
