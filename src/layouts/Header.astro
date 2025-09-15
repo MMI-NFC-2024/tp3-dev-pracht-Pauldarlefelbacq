@@ -1,23 +1,46 @@
+---
+import { Select } from 'free-astro-components'
+---
 <header>
     <nav>
         <div>
             <a href="/">Accueil</a>
         </div>
         <select id="species">
-            <option value="Adelie">Adelie</option>
-            <option value="Chinstrap">Chinstrap</option>
-            <option value="Gentoo">Gentoo</option>
+            <option value="Adelie/">Adelie</option>
+            <option value="Chinstrap/">Chinstrap</option>
+            <option value="Gentoo/">Gentoo</option>
         </select>
         <script>
-        document.querySelector("#species")?.addEventListener("change", (evt) => {
-        const value = (evt.target as HTMLSelectElement).value;
-        location.pathname = "/species/" + value;
-        });
+            const speciesSelect = document.querySelector("#species") as HTMLSelectElement;
+            const subtileSelect = document.querySelector("#subtile") as HTMLSelectElement;
+            
+            // Update selects based on current page
+            const path = location.pathname;
+            if (path.includes("/species/")) {
+                const species = path.split("/species/")[1]?.replace("/", "");
+                if (species && speciesSelect) speciesSelect.value = species + "/";
+            }
+            if (path.includes("ancre-specie")) {
+                if (subtileSelect) subtileSelect.value = "ancre-specie";
+            } else if (path.includes("iframe")) {
+                if (subtileSelect) subtileSelect.value = "test-iframe";
+            }
+
+            speciesSelect?.addEventListener("change", (evt) => {
+                const value = (evt.target as HTMLSelectElement).value;
+                location.pathname = "/species/" + value;
+            });
+            
+            subtileSelect?.addEventListener("change", (evt) => {
+                const value = (evt.target as HTMLSelectElement).value;
+                location.pathname = "/" + value;
+            });
         </script>
-        <div>
-            <a href="/test-iframe">Iframe</a>
-            <a href="/ancre-specie">Ancres Carrousel</a>
-        </div>
+        <select id="subtile">
+            <option value="test-iframe">Iframe</option>
+            <option value="ancre-specie">Ancres Carrousel</option>
+        </select>
     </nav>
     <style>
         header {
