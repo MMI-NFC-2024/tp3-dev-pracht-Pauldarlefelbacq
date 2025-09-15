@@ -3,11 +3,17 @@
         <div>
             <a href="/">Accueil</a>
         </div>
-        <div>
-            <a href="/species/Adelie">Adelie</a>
-            <a href="/species/Gentoo">Gentoo</a>
-            <a href="/species/Chinstrap">Chinstrap</a>
-        </div>
+        <select id="species">
+            <option value="Adelie">Adelie</option>
+            <option value="Chinstrap">Chinstrap</option>
+            <option value="Gentoo">Gentoo</option>
+        </select>
+        <script>
+        document.querySelector("#species")?.addEventListener("change", (evt) => {
+        const value = (evt.target as HTMLSelectElement).value;
+        location.pathname = "/species/" + value;
+        });
+        </script>
         <div>
             <a href="/test-iframe">Iframe</a>
             <a href="/ancre-specie">Ancres Carrousel</a>
