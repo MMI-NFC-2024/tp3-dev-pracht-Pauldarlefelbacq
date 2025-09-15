@@ -1,0 +1,53 @@
+---
+import Layout from "../layouts/Layout.astro";
+import GraphicSpecies from "../components/GraphicSpecies.astro";
+---
+<Layout>
+  <div class="container">
+    <nav>
+      <h2>Espèces de pengouin</h2>
+      <ul>
+        <li><a href="/species/Adelie" target="species-frame">Pengouin Adélie</a></li>
+        <li><a href="/species/Gentoo" target="species-frame">Pengouin Gentoo</a></li>
+        <li><a href="/species/Chinstrap" target="species-frame">Pengouin Chinstrap</a></li>
+      </ul>
+    </nav>
+    
+    <div class="iframe-container">
+      <iframe name="species-frame" id="species-frame" src="/species/Adelie" width="100%" ></iframe>
+    </div>
+  </div>
+
+  <script>
+    function resizeIframe() {
+      const iframe = document.getElementById('species-frame') as HTMLIFrameElement;
+      iframe.onload = function() {
+        try {
+          iframe.style.height = iframe.contentWindow!.document.body.scrollHeight + 'px';
+        } catch (e) {
+          console.error('Erreur lors du redimensionnement de l\'iframe:', e);
+        }
+      };
+    }
+    window.addEventListener('load', resizeIframe());
+    </script>
+
+<style>
+
+    .iframe-container {
+      width: 100%;
+      border: 1px solid ;
+      border-radius: 4px;
+      overflow: hidden;
+      padding: 2rem;
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem;
+    }
+</style>
+  
+</Layout>

@@ -1,0 +1,91 @@
+---
+import Layout from "../layouts/Layout.astro";
+import GraphicSpecies from "../components/GraphicSpecies.astro";
+---
+
+<Layout>
+    <div class="container">
+        <nav class="species-menu">
+            <h2>Espèces de pengouins</h2>
+            <ul>
+                <li><a href="#adelie">Pengouin Adélie</a></li>
+                <li><a href="#gentoo">Pengouin Gentoo</a></li>
+                <li><a href="#chinstrap">Pengouin Chinstrap</a></li>
+            </ul>
+        </nav>
+
+        <div class="slider-container">
+            <div class="slider">
+                <div id="adelie" class="slide">
+                    <h3>Pengouin Adélie</h3>
+                    <GraphicSpecies species="Adelie" />
+                </div>
+                <div id="gentoo" class="slide">
+                    <h3>Pengouin Gentoo</h3>
+                    <GraphicSpecies species="Gentoo" />
+                </div>
+                <div id="chinstrap" class="slide">
+                    <h3>Pengouin Chinstrap</h3>
+                    <GraphicSpecies species="Chinstrap" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .species-menu {
+            margin-bottom: 2rem;
+        }
+
+        .species-menu ul {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            padding: 0;
+            justify-content: center;
+        }
+
+        .species-menu a {
+            text-decoration: none;
+            font-weight: bold;
+            color: #333;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            background-color: #f0f0f0;
+            transition: all 0.3s ease;
+        }
+
+        .species-menu a:hover {
+            background-color: #ddd;
+        }
+
+        .slider-container {
+            width: 100%;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .slider {
+            display: flex;
+            width: 100%;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+        }
+
+
+        .slide {
+            flex: 0 0 100%;
+            width: 100%;
+            scroll-snap-align: start;
+            padding: 1rem;
+        }
+
+    </style>
+</Layout>
